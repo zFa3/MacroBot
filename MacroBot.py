@@ -7,7 +7,7 @@
 
 
 # import the libs
-import time, threading, keyboard as kb
+import time, threading, keyboard as kb, math
 from pynput.mouse import Controller, Button, Listener
 from pynput.keyboard import Listener, KeyCode
 
@@ -47,7 +47,7 @@ def Autoclicker():
         if not Failsafe_active:
             if RMB_clicker: 
                 mouse.click(Button.right, 1); time.sleep(d)
-            elif LMB_clicker: 
+            elif LMB_clicker:
                 mouse.click(Button.left, 1); time.sleep(d)
             elif int(burst_click):
                 mouse.click(Button.right, 1)
@@ -58,7 +58,27 @@ def Autoclicker():
                 time.sleep(0.25)
             elif custom:
                 # mouse.click(Button.right, 1); time.sleep(d)
-                pass
+                radius = int(input("Circle Radius: "))
+                center = mouse.position
+
+                steps = int(2 * math.pi * radius)
+
+                delay = 0.05
+
+                mouse.position = (center[0], center[1] - radius)
+
+                mouse.press(Button.left)
+
+                for i in range(steps+150):
+                    angle = math.pi * 2 * i / steps
+
+                    x = center[0] + radius * math.sin(angle)
+                    y = center[1] - radius * math.cos(angle)
+                    mouse.position = (x, y)
+                    time.sleep(delay)
+
+                mouse.release(Button.left)
+                mouse.position = center
             else: time.sleep(1)
         else: time.sleep(1)
 
