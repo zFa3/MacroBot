@@ -23,11 +23,9 @@ def eval_k(key):
             with open('keys.txt', 'w') as file:
                 for i, t, in enumerate(keys):
                     file.write(f"{t} : count - {keys[t]}\n")
-                    #print(f"{t} : count - {keys[t]}\n")
             with open('Doubled_keys.txt', 'w') as file:
                 for i, t, in enumerate(keys):
                     file.write(f"{t} : count - {doubled_keys[t]}\n")
-                    #print(f"{t} : count - {keys[t]}\n")
         except: print("Error Accessing File")
 def start():
     global keys, toggle, doubled_keys, lastKey
